@@ -1,17 +1,17 @@
 import { Practice } from '../types';
+import { audioStorage } from './audioStorage';
 
 /**
- * Provedor de mídia para o aplicativo Saindo do Estado de Alerta.
+ * Provedor de mídia para o aplicativo Intuir Caminhos.
  * 
- * Permite que arquivos de áudio e vídeo sejam carregados de:
- * 1. Pasta local: /public/audio/ (ex: '/audio/pratica-dia-1.mp3' ou '/audio/pratica-dia-1.wav')
- * 2. URLs remotas: Firebase Storage, Amazon S3, Cloudflare R2 ou CDN dedicado
- * 3. Base URL configurável via variável de ambiente VITE_MEDIA_BASE_URL
+ * Permite que arquivos de áudio sejam carregados de:
+ * 1. Pasta pública local: /public/audio/praticas/ (ex: '/audio/praticas/estou-acelerado.mp3')
+ * 2. Arquivo local carregado no navegador pelo usuário (persistido via IndexedDB com URL Blob)
+ * 3. URLs remotas: Netlify CDN, Firebase Storage, S3 ou CDN dedicado
  */
 export const mediaService = {
   /**
-   * Resolve a URL final do arquivo de áudio da prática.
-   * Não fixa o áudio no código-fonte, permitindo migração suave para Firebase Storage.
+   * Resolve a URL estática do arquivo de áudio da prática.
    */
   resolveAudioUrl(practice: Practice): string {
     const rawUrl = practice.arquivoAudio || practice.audioUrl;
@@ -20,8 +20,8 @@ export const mediaService = {
       return '/audio/pratica-dia-1.wav';
     }
 
-    // Se já for uma URL absoluta completa (ex: Firebase Storage ou CDN externo)
-    if (rawUrl.startsWith('http://') || rawUrl.startsWith('https://')) {
+    // Se já for uma URL absoluta completa ou Blob local
+    if (rawUrl.startsWith('http://') || rawUrl.startsWith('https://') || rawUrl.startsWith('blob:')) {
       return rawUrl;
     }
 
@@ -35,6 +35,32 @@ export const mediaService = {
 
     // Padrão local: pasta pública
     return rawUrl.startsWith('/') ? rawUrl : `/${rawUrl}`;
+  },
+
+  /**
+   * Tenta carregar o arquivo de áudio salvo no IndexedDB local do usuário.
+   */
+  async loadLocalAudioBlobUrl(practiceId: string): Promise<string | null> {
+    const blob = await audioStorage.getAudioBlob(practiceId);
+    if (blob) {
+      return URL.createObjectURL(blob);
+    }
+    return null;
+  },
+
+  /**
+   * Salva o arquivo de áudio enviado pelo usuário no navegador local e retorna uma URL Blob pronta.
+   */
+  async saveLocalAudioFile(practiceId: string, file: File): Promise<string> {
+    await audioStorage.saveAudio(practiceId, file);
+    return URL.createObjectURL(file);
+  },
+
+  /**
+   * Remove o arquivo salvo localmente no navegador.
+   */
+  async removeLocalAudioFile(practiceId: string): Promise<void> {
+    await audioStorage.removeAudio(practiceId);
   },
 
   /**

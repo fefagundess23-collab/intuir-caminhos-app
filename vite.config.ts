@@ -60,7 +60,7 @@ export default defineConfig(() => {
           clientsClaim: true,
           // Precacheia o shell da aplicação, estilos, fontes e imagens
           globPatterns: ['**/*.{js,css,html,ico,png,svg,jpg,jpeg,woff,woff2}'],
-          maximumFileSizeToCacheInBytes: 3 * 1024 * 1024, // 3MB para imagens de alta resolução
+          maximumFileSizeToCacheInBytes: 15 * 1024 * 1024, // 15MB para áudios completos de práticas
           runtimeCaching: [
             {
               urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,

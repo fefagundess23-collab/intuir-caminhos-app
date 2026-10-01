@@ -83,12 +83,12 @@ export const PRACTICES: Practice[] = [
     quandoUsar: 'Quando você sente que está no automático ou com pressa.',
     descricao:
       'Respire naturalmente. Observe respiração, tensão, pés no chão, esforço desnecessário, mandíbula, ombros e pressa. Não tente corrigir.',
-    duracao: '5–7 min',
-    durationMinutes: 6,
+    duracao: '6 min',
+    durationMinutes: 6.5,
     perguntaPosPratica: 'O que percebi quando não tentei mudar nada?',
     categoria: 'desaceleracao',
     isAvailable: true,
-    arquivoAudio: '/audio/pratica-dia-1.wav',
+    arquivoAudio: '/audio/praticas/estou-acelerado.mp3',
     focusArea: 'Mandíbula, ombros e ritmo interno',
     instrucoes: [
       'Chegue ao seu corpo exatamente como você está agora.',
@@ -529,7 +529,7 @@ export const QUICK_NEED_OPTIONS: QuickNeedOption[] = [
   },
   {
     id: 'qn-acelerado',
-    label: 'Estou muito acelerado',
+    label: 'Estou acelerado',
     recommendedPracticeId: 'dia-1',
     kicker: 'Pressa interna',
     explanation: 'Perceba os primeiros sinais sutis de velocidade no corpo.',
