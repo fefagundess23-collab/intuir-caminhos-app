@@ -11,15 +11,24 @@ export default defineConfig(() => {
       tailwindcss(),
       VitePWA({
         registerType: 'autoUpdate',
-        includeAssets: ['favicon.png', 'apple-touch-icon.png', 'icon.svg'],
+        includeAssets: [
+          'favicon.png',
+          'apple-touch-icon.png',
+          'icon.svg',
+          'icon-maskable.svg',
+          'pwa-192x192.png',
+          'pwa-512x512.png',
+          'pwa-maskable-512x512.png',
+        ],
         manifest: {
           id: '/',
-          name: 'Saindo do Estado de Alerta',
-          short_name: 'Alerta',
-          description: '21 dias de práticas corporais curtas para desacelerar o corpo e voltar ao seu eixo. Por Intuir Caminhos.',
+          name: 'Intuir Caminhos',
+          short_name: 'Intuir Caminhos',
+          description: 'Práticas corporais para desacelerar, perceber e voltar ao corpo.',
           theme_color: '#F7F5F0',
           background_color: '#F7F5F0',
           display: 'standalone',
+          orientation: 'portrait',
           start_url: '/',
           scope: '/',
           icons: [
@@ -44,7 +53,54 @@ export default defineConfig(() => {
           ],
         },
         workbox: {
+          // Precacheia o shell da aplicação, estilos, fontes e imagens
           globPatterns: ['**/*.{js,css,html,ico,png,svg,jpg,jpeg,woff,woff2}'],
+          maximumFileSizeToCacheInBytes: 3 * 1024 * 1024, // 3MB para imagens de alta resolução
+          runtimeCaching: [
+            {
+              urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
+              handler: 'CacheFirst',
+              options: {
+                cacheName: 'google-fonts-cache',
+                expiration: {
+                  maxEntries: 10,
+                  maxAgeSeconds: 60 * 60 * 24 * 365,
+                },
+                cacheableResponse: {
+                  statuses: [0, 200],
+                },
+              },
+            },
+            {
+              urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
+              handler: 'CacheFirst',
+              options: {
+                cacheName: 'gstatic-fonts-cache',
+                expiration: {
+                  maxEntries: 10,
+                  maxAgeSeconds: 60 * 60 * 24 * 365,
+                },
+                cacheableResponse: {
+                  statuses: [0, 200],
+                },
+              },
+            },
+            {
+              urlPattern: /\.(?:wav|mp3|m4a)$/i,
+              handler: 'CacheFirst',
+              options: {
+                cacheName: 'audio-cache',
+                expiration: {
+                  maxEntries: 10,
+                  maxAgeSeconds: 60 * 60 * 24 * 30, // 30 dias
+                },
+                cacheableResponse: {
+                  statuses: [0, 200, 206],
+                },
+                rangeRequests: true,
+              },
+            },
+          ],
         },
         devOptions: {
           enabled: true,
@@ -54,7 +110,7 @@ export default defineConfig(() => {
     ],
     resolve: {
       alias: {
-        '@': path.resolve(__dirname, '.'),
+        '@': path.resolve('.'),
       },
     },
     server: {
