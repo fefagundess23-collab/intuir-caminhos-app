@@ -21,9 +21,9 @@ export default defineConfig(() => {
           'pwa-maskable-512x512.png',
         ],
         manifest: {
-          id: '/?v=2',
+          id: '/?v=3',
           name: 'Intuir Caminhos',
-          short_name: 'Intuir Caminhos',
+          short_name: 'Intuir',
           description: 'Práticas corporais para desacelerar, perceber e voltar ao corpo.',
           theme_color: '#F7F5F0',
           background_color: '#F7F5F0',
@@ -54,7 +54,7 @@ export default defineConfig(() => {
           ],
         },
         workbox: {
-          cacheId: 'intuir-caminhos-v2',
+          cacheId: 'intuir-caminhos-v3',
           cleanupOutdatedCaches: true,
           skipWaiting: true,
           clientsClaim: true,
