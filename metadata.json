@@ -1,0 +1,6 @@
+{
+  "name": "Saindo do Estado de Alerta",
+  "description": "21 dias de práticas corporais curtas para desacelerar o corpo, perceber o que está acontecendo e voltar ao seu eixo. Por Intuir Caminhos.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

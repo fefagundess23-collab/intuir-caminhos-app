@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="128" fill="#F7F5F0"/>
+  <!-- Calming subtle circular presence rings -->
+  <circle cx="256" cy="256" r="190" fill="none" stroke="#E5DEC9" stroke-width="2" stroke-dasharray="6 8" opacity="0.6"/>
+  <circle cx="256" cy="256" r="145" fill="#EAE5D9" fill-opacity="0.45" stroke="#D8CEB9" stroke-width="1.5"/>
+  <circle cx="256" cy="256" r="105" fill="#DFD8C7" fill-opacity="0.5"/>
+  
+  <!-- Organic grounding pebble and leaf silhouette -->
+  <path d="M256 160 C320 160 350 215 350 270 C350 330 305 352 256 352 C207 352 162 330 162 270 C162 215 192 160 256 160 Z" fill="#243832"/>
+  
+  <!-- Subtle terracotta warm heart / inner axis -->
+  <ellipse cx="256" cy="275" rx="42" ry="52" fill="#BA6844" opacity="0.92"/>
+  
+  <!-- Breath ripple / axis indicator -->
+  <path d="M256 240 C256 220 256 200 256 185" stroke="#F7F5F0" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="256" cy="275" r="8" fill="#F7F5F0"/>
+</svg>
