@@ -21,7 +21,7 @@ export default defineConfig(() => {
           'pwa-maskable-512x512.png',
         ],
         manifest: {
-          id: '/',
+          id: '/?v=2',
           name: 'Intuir Caminhos',
           short_name: 'Intuir Caminhos',
           description: 'Práticas corporais para desacelerar, perceber e voltar ao corpo.',
@@ -31,6 +31,7 @@ export default defineConfig(() => {
           orientation: 'portrait',
           start_url: '/',
           scope: '/',
+          lang: 'pt-BR',
           icons: [
             {
               src: '/pwa-192x192.png',
@@ -53,6 +54,10 @@ export default defineConfig(() => {
           ],
         },
         workbox: {
+          cacheId: 'intuir-caminhos-v2',
+          cleanupOutdatedCaches: true,
+          skipWaiting: true,
+          clientsClaim: true,
           // Precacheia o shell da aplicação, estilos, fontes e imagens
           globPatterns: ['**/*.{js,css,html,ico,png,svg,jpg,jpeg,woff,woff2}'],
           maximumFileSizeToCacheInBytes: 3 * 1024 * 1024, // 3MB para imagens de alta resolução
