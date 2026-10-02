@@ -54,7 +54,7 @@ export default defineConfig(() => {
           ],
         },
         workbox: {
-          cacheId: 'intuir-caminhos-v3',
+          cacheId: 'intuir-caminhos-v4',
           cleanupOutdatedCaches: true,
           skipWaiting: true,
           clientsClaim: true,
@@ -92,9 +92,10 @@ export default defineConfig(() => {
             },
             {
               urlPattern: /\.(?:wav|mp3|m4a)$/i,
-              handler: 'CacheFirst',
+              handler: 'NetworkFirst',
               options: {
-                cacheName: 'audio-cache',
+                cacheName: 'audio-cache-v4',
+                networkTimeoutSeconds: 3,
                 expiration: {
                   maxEntries: 10,
                   maxAgeSeconds: 60 * 60 * 24 * 30, // 30 dias

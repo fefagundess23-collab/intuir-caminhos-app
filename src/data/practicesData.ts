@@ -88,7 +88,7 @@ export const PRACTICES: Practice[] = [
     perguntaPosPratica: 'O que percebi quando não tentei mudar nada?',
     categoria: 'desaceleracao',
     isAvailable: true,
-    arquivoAudio: '/audio/praticas/estou-acelerado.mp3',
+    arquivoAudio: '/audio/estou-acelerado-web.m4a',
     focusArea: 'Mandíbula, ombros e ritmo interno',
     instrucoes: [
       'Chegue ao seu corpo exatamente como você está agora.',
